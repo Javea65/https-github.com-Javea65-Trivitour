@@ -165,5 +165,11 @@
     <Folder Include="Impl\PluginArgs\" />
     <Folder Include="Servicio\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LogLocal\LogLocal.csproj">
+      <Project>{603376d1-3aa0-4545-a15c-2f9eb1e8d182}</Project>
+      <Name>LogLocal</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

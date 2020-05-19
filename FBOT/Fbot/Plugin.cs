@@ -13,6 +13,7 @@
         private readonly string m_version_Dia = "24";
         private readonly string m_version_Mes = "04";
         private readonly string m_version_Año = "20";
+        private LogLocal.LogLocal _log;
 
         #region Inicio
 
@@ -33,7 +34,7 @@
             //set your default values here
             m_Name = "Fbot 2020";
             m_Author = "Javea65";
-            m_Version = string.Format("1.{0}.{1}.{2}.{3}", m_version_Año, m_version_Mes, m_version_Dia, m_version_Hora);
+            m_Version = string.Format("1.{0}.{1}.{2}.{3}", m_version_Año, m_version_Mes, m_version_Dia, m_version_Hora);            
         }
         //declare the standard methods
         public override void Dispose()
@@ -44,10 +45,14 @@
         public override void Initialize()
         {
             CargandoPaneles(this.LeftPanel);
+            CrearLog();
         }
 
         //if you want to add a new method to override, use public override
-
+        private void CrearLog()
+        {
+            _log = new LogLocal.LogLocal("Icechat", "Fbot");
+        }
         #endregion
         #region Control
 
@@ -117,7 +122,9 @@
         {
             var clave = new CodigoJugador(args).Get();
             if (_listaJugadores.ContainsKey(clave)) return;
-            _listaJugadores.Add(clave, new Jugador(args,clave));
+            var jugador = new Jugador(args, clave);
+            _listaJugadores.Add(clave, jugador);
+            _log.Grabar("CrearJugador", $"Jugador:{jugador.Nick}");
         }
 
         
